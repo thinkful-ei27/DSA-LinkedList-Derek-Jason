@@ -163,6 +163,44 @@ const isEmpty = list => {
   return !list.head;
 };
 
+const findPrevious = (list, item)=>{
+  if (!list.head) {
+    console.log('Nothing in list');
+    return;
+  }
+  if (list.head.value === item) {
+    console.log('There is no previous node');
+    return;
+  }
+  let previousNode = list.head;
+  let currNode = list.head;
+
+  while ((currNode !== null) && (currNode.value !== item)) {
+    previousNode = currNode;
+    currNode = currNode.next;
+  }
+  if (currNode === null) {
+    console.log('Item not found');
+    return;
+  }
+  return previousNode.value;
+}
+
+const findLast = (list) => {
+  if (!list.head) {
+    console.log('Nothing in list');
+    return;
+  }
+  let previousNode = list.head;
+  let currNode = list.head;
+
+  while (currNode !== null) {
+    previousNode= currNode;
+    currNode = currNode.next;
+  }
+  return previousNode.value;
+}
+
 function main() {
   const SSL = new LinkedList();
   const emptySSL = new LinkedList();
@@ -178,9 +216,11 @@ function main() {
   SSL.insertAt('Kat', 3);
   SSL.remove('Tauhida');
   display(SSL);
-  console.log(size(SSL));
-  console.log(isEmpty(SSL));
-  console.log(isEmpty(emptySSL));
+// console.log(size(SSL));
+// console.log(isEmpty(SSL));
+//console.log(isEmpty(emptySSL));
+//  console.log(findPrevious(SSL, 'Hotdog'));
+console.log(findLast(SSL));
 }
 
 main();
