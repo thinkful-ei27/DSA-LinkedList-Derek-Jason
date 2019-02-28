@@ -262,6 +262,27 @@ const middleOfList = list => {
   return arr[mid];
 };
 
+const hasCycle = (list) => {
+  if (!list.head) {
+    console.log('Nothing in list');
+    return;
+  }
+
+  let currNode = list.head;
+  let arr = [];
+
+  while (currNode !== null){
+    for (let i = 0; i < arr.length; i++){
+      if (currNode === arr[i]){
+        return true;
+      }
+    }
+    arr.push(currNode);
+    currNode = currNode.next;
+  }
+  return false;
+}
+
 function main() {
   const SSL = new LinkedList();
   const emptySSL = new LinkedList();
@@ -276,8 +297,8 @@ function main() {
   SSL.insertAfter('Hotdog', 'Helo');
   SSL.insertAt('Kat', 3);
   SSL.remove('Tauhida');
-  display(SSL);
-  console.log(size(SSL));
+  //display(SSL);
+  //console.log(size(SSL));
   // console.log(isEmpty(SSL));
   //console.log(isEmpty(emptySSL));
   //  console.log(findPrevious(SSL, 'Hotdog'));
@@ -285,7 +306,19 @@ function main() {
   // reverseList(SSL);
   // display(SSL);
   // console.log(thirdFromEnd(SSL));
-  console.log(middleOfList(SSL));
+  //console.log(middleOfList(SSL));
+  const CycleList = new LinkedList();  
+  CycleList.insertLast('Apollo');
+  CycleList.insertLast('Boomer');
+  CycleList.insertLast('Helo');
+  CycleList.insertLast('Husker');
+  CycleList.insertLast('Starbuck');
+  CycleList.insertLast('Tauhida');
+  let oneNode = CycleList.find('Boomer');
+  let anotherNode = CycleList.find('Starbuck');
+  anotherNode.next = oneNode;
+ console.log(hasCycle(SSL));
+ console.log(hasCycle(CycleList));
 }
 
 main();
