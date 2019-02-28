@@ -163,7 +163,7 @@ const isEmpty = list => {
   return !list.head;
 };
 
-const findPrevious = (list, item)=>{
+const findPrevious = (list, item) => {
   if (!list.head) {
     console.log('Nothing in list');
     return;
@@ -184,7 +184,7 @@ const findPrevious = (list, item)=>{
     return;
   }
   return previousNode.value;
-}
+};
 
 const findLast = (list) => {
   if (!list.head) {
@@ -195,11 +195,72 @@ const findLast = (list) => {
   let currNode = list.head;
 
   while (currNode !== null) {
-    previousNode= currNode;
+    previousNode = currNode;
     currNode = currNode.next;
   }
   return previousNode.value;
-}
+};
+
+const reverseList = list => {
+  if (!list.head) {
+    console.log('Nothing in list');
+    return;
+  }
+  let previousNode = null;
+  let currNode = list.head;
+  let nextNode = list.head.next;
+
+  while (currNode !== null) {
+    nextNode = currNode.next;
+    currNode.next = previousNode;
+    previousNode = currNode;
+    currNode = nextNode;
+  }
+  list.head = previousNode;
+  return list;
+};
+
+const thirdFromEnd = list => {
+  const listSize = size(list);
+
+  if (!list.head) {
+    console.log('Nothing in list');
+    return;
+  }
+
+  let currNode = list.head;
+
+  for (let i = 0; i < listSize - 3; i++) {
+    currNode = currNode.next;
+  }
+
+  if (currNode === null) {
+    console.log('Item not found');
+    return;
+  }
+
+  return currNode.value;
+};
+
+const middleOfList = list => {
+  if (!list.head) {
+    console.log('Nothing in list');
+    return;
+  }
+
+  const arr = [];
+
+  let currNode = list.head;
+
+  while (currNode !== null) {
+    arr.push(currNode.value);
+    currNode = currNode.next;
+  }
+
+  const mid = arr.length % 2 === 0 ? arr.length / 2 : Math.floor(arr.length / 2);
+
+  return arr[mid];
+};
 
 function main() {
   const SSL = new LinkedList();
@@ -216,11 +277,15 @@ function main() {
   SSL.insertAt('Kat', 3);
   SSL.remove('Tauhida');
   display(SSL);
-// console.log(size(SSL));
-// console.log(isEmpty(SSL));
-//console.log(isEmpty(emptySSL));
-//  console.log(findPrevious(SSL, 'Hotdog'));
-console.log(findLast(SSL));
+  console.log(size(SSL));
+  // console.log(isEmpty(SSL));
+  //console.log(isEmpty(emptySSL));
+  //  console.log(findPrevious(SSL, 'Hotdog'));
+  // console.log(findLast(SSL));
+  // reverseList(SSL);
+  // display(SSL);
+  // console.log(thirdFromEnd(SSL));
+  console.log(middleOfList(SSL));
 }
 
 main();
